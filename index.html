@@ -1,1 +1,78 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Juego Interactivo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .option {
+            margin: 10px 0;
+        }
+    </style>
+    <script>
+        function startAdventure() {
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('scene1').style.display = 'block';
+        }
+
+        function goToScene(scene) {
+            var scenes = document.getElementsByClassName('scene');
+            for (var i = 0; i < scenes.length; i++) {
+                scenes[i].style.display = 'none';
+            }
+            document.getElementById(scene).style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div id="intro">
+        <h1>Bienvenido a la Aventura</h1>
+        <p>Te encuentras en un bosque misterioso, y debes tomar decisiones para encontrar la salida.</p>
+        <button onclick="startAdventure()">Comenzar</button>
+    </div>
+
+    <div id="scene1" class="scene" style="display:none;">
+        <h2>Escena 1</h2>
+        <p>Te encuentras en una encrucijada. Puedes ir a la izquierda hacia un sendero oscuro, o a la derecha hacia una colina iluminada.</p>
+        <button class="option" onclick="goToScene('scene2')">Ir a la izquierda</button>
+        <button class="option" onclick="goToScene('scene3')">Ir a la derecha</button>
+    </div>
+
+    <div id="scene2" class="scene" style="display:none;">
+        <h2>Escena 2</h2>
+        <p>El sendero oscuro te lleva a una cueva con un brillo misterioso en su interior.</p>
+        <button class="option" onclick="goToScene('scene4')">Entrar en la cueva</button>
+        <button class="option" onclick="goToScene('scene5')">Regresar a la encrucijada</button>
+    </div>
+
+    <div id="scene3" class="scene" style="display:none;">
+        <h2>Escena 3</h2>
+        <p>La colina iluminada te ofrece una vista panorámica del bosque, pero ves una torre en la distancia.</p>
+        <button class="option" onclick="goToScene('scene6')">Ir hacia la torre</button>
+        <button class="option" onclick="goToScene('scene7')">Explorar la colina</button>
+    </div>
+
+    <div id="scene4" class="scene" style="display:none;">
+        <h2>Escena 4</h2>
+        <p>Dentro de la cueva, encuentras un tesoro escondido. ¡Has encontrado el final feliz!</p>
+    </div>
+
+    <div id="scene5" class="scene" style="display:none;">
+        <h2>Escena 5</h2>
+        <p>Regresas a la encrucijada y te pierdes en el bosque. ¡Es un final trágico!</p>
+    </div>
+
+    <div id="scene6" class="scene" style="display:none;">
+        <h2>Escena 6</h2>
+        <p>La torre es el hogar de un sabio que te muestra la salida del bosque. ¡Has encontrado el final feliz!</p>
+    </div>
+
+    <div id="scene7" class="scene" style="display:none;">
+        <h2>Escena 7</h2>
+        <p>Mientras exploras la colina, te pierdes y nunca encuentras el camino de regreso. ¡Es un final trágico!</p>
+    </div>
+</body>
+</html>

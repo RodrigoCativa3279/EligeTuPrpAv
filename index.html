@@ -13,66 +13,108 @@
         }
     </style>
     <script>
-        function startAdventure() {
+        var llave = false;
+        function empezar() {
             document.getElementById('intro').style.display = 'none';
-            document.getElementById('scene1').style.display = 'block';
+            document.getElementById('entrada').style.display = 'block';
         }
 
-        function goToScene(scene) {
+        function cambiarescena(scene) {
             var scenes = document.getElementsByClassName('scene');
             for (var i = 0; i < scenes.length; i++) {
                 scenes[i].style.display = 'none';
             }
             document.getElementById(scene).style.display = 'block';
         }
+        function encontrarllaveseguir() {
+            llave = true;
+            cambiarescena('antorcha');
+            
+        }
+        function encontrarllavefrente() {
+            llave = true;
+            cambiarescena('entrada');
+        }
+        function intentarcofre() {
+            if (llave) {
+                cambiarescena('cofreabierto');
+            } else {
+                alert("No pudiste abrir el cofre, habra alguna llave escondida");
+                cambiarescena('frente');
+            }
+        }
     </script>
 </head>
 <body>
     <div id="intro">
-        <h1>Bienvenido a la Aventura</h1>
-        <p>Te encuentras en un bosque misterioso, y debes tomar decisiones para encontrar la salida.</p>
-        <button onclick="startAdventure()">Comenzar</button>
+        <h1>Introducción</h1>
+        <p>Parece que te desorientaste y no sabes como volver a tu pueblo, pero ves un enorme castillo de piedra...</p>
+        <button onclick="empezar()">Comenzar</button>
     </div>
 
-    <div id="scene1" class="scene" style="display:none;">
-        <h2>Escena 1</h2>
-        <p>Te encuentras en una encrucijada. Puedes ir a la izquierda hacia un sendero oscuro, o a la derecha hacia una colina iluminada.</p>
-        <button class="option" onclick="goToScene('scene2')">Ir a la izquierda</button>
-        <button class="option" onclick="goToScene('scene3')">Ir a la derecha</button>
+    <div id="entrada" class="scene" style="display:none;">
+        <h2>Abandonado y perdido</h2>
+        <p>Te encuentras en frente del castillo, este parece abandonado y oscuro. Puedes ir a la izquierda hacia una puerta estrecha escondida, seguir de frente para entrar en el castillo por el gran arco frontal o abandonar la edificación y buscar por otros lares.<br>Escuchas ladridos lejanos que se acercan...</p>
+        <button class="option" onclick="cambiarescena('escaleras')">Ir a la izquierda</button>
+        <button class="option" onclick="cambiarescena('frente')">Seguir de frente</button>
+        <button class="option" onclick="cambiarescena('lobos')">Irte</button>
     </div>
 
-    <div id="scene2" class="scene" style="display:none;">
-        <h2>Escena 2</h2>
-        <p>El sendero oscuro te lleva a una cueva con un brillo misterioso en su interior.</p>
-        <button class="option" onclick="goToScene('scene4')">Entrar en la cueva</button>
-        <button class="option" onclick="goToScene('scene5')">Regresar a la encrucijada</button>
+    <div id="escaleras" class="scene" style="display:none;">
+        <h2>Sombrio descenso</h2>
+        <p>El sendero estrecho te lleva a una escalera de madera podrida, mientras más bajas se hace más oscuro, cada escalon rechiña más fuerte, llegas a una biblioteca sin luz, puedes investigar las estanterias o seguir de largo</p>
+        <button class="option" onclick="cambiarescena('estanterias')">Investigar</button>
+        <button class="option" onclick="cambiarescena('antorcha')">Seguir de largo</button>
     </div>
 
-    <div id="scene3" class="scene" style="display:none;">
-        <h2>Escena 3</h2>
-        <p>La colina iluminada te ofrece una vista panorámica del bosque, pero ves una torre en la distancia.</p>
-        <button class="option" onclick="goToScene('scene6')">Ir hacia la torre</button>
-        <button class="option" onclick="goToScene('scene7')">Explorar la colina</button>
+    <div id="frente" class="scene" style="display:none;">
+        <h2>El gran arco</h2>
+        <p>Pasas por el arco del castillo, todo parece estar abandonado, entras a una habitación y encuentras un gran cofre viejo reforzado, algo valioso escondera, puedes intentar abrirlo o simplemente irte.</p>
+        <button class="option" onclick="intentarcofre()">intentar abrir cofre</button>
+        <button class="option" onclick="cambiarescena('entrada')">Irte</button>
     </div>
 
-    <div id="scene4" class="scene" style="display:none;">
-        <h2>Escena 4</h2>
-        <p>Dentro de la cueva, encuentras un tesoro escondido. ¡Has encontrado el final feliz!</p>
+    <div id="estanterias" class="scene" style="display:none;">
+        <h2>Suerte misteriosa</h2>
+        <p>Despues de indagar en la estanterias te encuentras un mapa viejo pero útil, también encuentras una llave antigua y oxidada. Puedes regresar al pueblo, seguir de largo por la intrigante oscuridad o regresar al frente del castillo.</p>
+        <button class="option" onclick="cambiarescena('regreso')">Regresar al pueblo</button>
+        <button class="option" onclick="encontrarllaveseguir()">Seguir de largo</button>
+        <button class="option" onclick="encontrarllavefrente()">Regresar al frente del castillo</button>
     </div>
 
-    <div id="scene5" class="scene" style="display:none;">
-        <h2>Escena 5</h2>
-        <p>Regresas a la encrucijada y te pierdes en el bosque. ¡Es un final trágico!</p>
+    <div id="antorcha" class="scene" style="display:none;">
+        <h2>Confundido y dudoso</h2>
+        <p>Has encontrado una antorcha apagada, puedes encenderla y seguir o dar media vuelta y regresar</p>
+        <button class="option" onclick="cambiarescena('rituales')">Encender y seguir</button>
+        <button class="option" onclick="cambiarescena('entrada')">Regresar a la entrada</button>
     </div>
 
-    <div id="scene6" class="scene" style="display:none;">
-        <h2>Escena 6</h2>
-        <p>La torre es el hogar de un sabio que te muestra la salida del bosque. ¡Has encontrado el final feliz!</p>
+    <div id="cofreabierto" class="scene" style="display:none;">
+        <h2>Eres millonario</h2>
+        <p>Has abierto el cofre con la llave vieja y oxidada, se te iluminan los ojos por el brillo del oro reluciente que has encontrado. Puedes irte al pueblo con las riquezas del cofre o seguir explorando</p>
+        <button class="option" onclick="cambiarescena('regresodorado')">Regresar al pueblo con el oro</button>
+        <button class="option" onclick="cambiarescena('entrada')">Regresar a la entrada</button>
     </div>
 
-    <div id="scene7" class="scene" style="display:none;">
-        <h2>Escena 7</h2>
-        <p>Mientras exploras la colina, te pierdes y nunca encuentras el camino de regreso. ¡Es un final trágico!</p>
+    <div id="rituales" class="scene" style="display:none;">
+        <h2>Iluminado y desesperanzador</h2>
+        <p>Enciendes la antorcha y ves que decenas de deformes monstruos te estan cazando solo con la mirada, das media vuelta e intentas huir para solo chocar con un gigante ogro hambriento...<br>Termino tu historia, no tienes escapatoria, sacaste el peor final...</p>
     </div>
+
+    <div id="regreso" class="scene" style="display:none;">
+        <h2>Regreso al pueblo</h2>
+        <p>Has regresado al pueblo, completaste la aventura con un buen final.</p>
+    </div>
+
+    <div id="lobos" class="scene" style="display:none;">
+        <h2>Ignoraste los ladridos</h2>
+        <p>Los ladridos lejanos no eran tan lejanos, unos lobos hambrientos te han devorado, aca termina tu corta aventura</p>
+    </div>
+
+    <div id="regresodorado" class="scene" style="display:none;">
+        <h2>Felicidades</h2>
+        <p>Te has convertido en millonario y has regresado sano y salvo al pueblo, sacaste el mejor final</p>
+    </div>
+
 </body>
 </html>
